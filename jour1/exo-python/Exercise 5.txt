@@ -1,0 +1,6 @@
+Écrivez un programme Python pour trouver les nombres divisibles par 7 et multiples de 5, entre 1 500 et 2 700 (tous deux inclus).
+
+for x in range(1500, 2701):
+
+1505,1540,1575,1610,1645,1680,1715,1750,1785,1820,1855,1890,1925,1960,1995,2030,2065,2100,2135,2170,2205,2240,
+2275,2310,2345,2380,2415,2450,2485,2520,2555,2590,2625,2660,2695

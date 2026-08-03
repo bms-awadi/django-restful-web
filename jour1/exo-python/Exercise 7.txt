@@ -1,0 +1,7 @@
+Écrire un programme Python pour compter le nombre de nombres pairs et impairs dans une série de nombres
+
+numbers = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+
+Nombre de nombres pairs : 4                                                                                    
+Nombre de nombres impairs : 5

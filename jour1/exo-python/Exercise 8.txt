@@ -1,0 +1,34 @@
+Écrivez un programme Python qui itère les entiers de 1 à 50. Pour les multiples de trois, imprimez « Fizz » au lieu du nombre et pour les multiples de cinq, imprimez « Buzz ». Pour les nombres multiples de trois et cinq, imprimez « FizzBuzz ».
+
+
+for fizzbuzz in range(51):
+
+
+fizzbuzz
+1
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+ ..... 
+ 
+41
+fizz
+43
+44
+fizzbuzz
+46
+47
+fizz
+49
+buzz
