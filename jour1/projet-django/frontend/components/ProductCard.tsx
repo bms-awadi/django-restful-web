@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   name: {
-    color: colors.textPrimary,
+    color: colors.neonYellow,
     fontSize: 14,
     fontWeight: '600',
   },

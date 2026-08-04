@@ -3,14 +3,14 @@ import { StyleSheet, Text, type TextStyle } from 'react-native';
 
 import { colors, glow } from '../constants/theme';
 
-type Props = PropsWithChildren<{ style?: TextStyle }>;
+type Props = PropsWithChildren<{ style?: TextStyle; color?: string }>;
 
-export function Title({ children, style }: Props) {
-  return <Text style={[styles.title, glow(colors.neonGreen), style]}>{children}</Text>;
+export function Title({ children, style, color = colors.neonGreen }: Props) {
+  return <Text style={[styles.title, { color }, glow(color), style]}>{children}</Text>;
 }
 
-export function Tagline({ children, style }: Props) {
-  return <Text style={[styles.tagline, glow(colors.neonYellow), style]}>{children}</Text>;
+export function Tagline({ children, style, color = colors.neonYellow }: Props) {
+  return <Text style={[styles.tagline, { color }, glow(color), style]}>{children}</Text>;
 }
 
 export function Body({ children, style }: Props) {
@@ -26,11 +26,9 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '800',
     letterSpacing: 4,
-    color: colors.neonGreen,
   },
   tagline: {
     fontSize: 18,
-    color: colors.neonYellow,
   },
   body: {
     fontSize: 14,
