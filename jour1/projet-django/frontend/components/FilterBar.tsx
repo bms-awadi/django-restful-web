@@ -1,11 +1,12 @@
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import type { Category } from '../api/products';
 import { colors } from '../constants/theme';
 
 type Props = {
-  categories: string[];
-  selectedCategory: string | null;
-  onSelectCategory: (category: string | null) => void;
+  categories: Category[];
+  selectedCategoryId: number | null;
+  onSelectCategory: (categoryId: number | null) => void;
   minPrice: string;
   maxPrice: string;
   onChangeMinPrice: (value: string) => void;
@@ -14,7 +15,7 @@ type Props = {
 
 export default function FilterBar({
   categories,
-  selectedCategory,
+  selectedCategoryId,
   onSelectCategory,
   minPrice,
   maxPrice,
@@ -24,13 +25,17 @@ export default function FilterBar({
   return (
     <View style={styles.container}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chips}>
-        <Chip label="Toutes" active={selectedCategory === null} onPress={() => onSelectCategory(null)} />
+        <Chip
+          label="Toutes"
+          active={selectedCategoryId === null}
+          onPress={() => onSelectCategory(null)}
+        />
         {categories.map((category) => (
           <Chip
-            key={category}
-            label={category}
-            active={selectedCategory === category}
-            onPress={() => onSelectCategory(category)}
+            key={category.id}
+            label={category.name}
+            active={selectedCategoryId === category.id}
+            onPress={() => onSelectCategory(category.id)}
           />
         ))}
       </ScrollView>

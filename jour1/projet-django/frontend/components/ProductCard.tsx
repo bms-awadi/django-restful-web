@@ -1,8 +1,8 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import type { Product } from '../api/products';
 import { colors } from '../constants/theme';
-import type { Product } from '../constants/mockProducts';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -10,8 +10,8 @@ export default function ProductCard({ product }: { product: Product }) {
       <Pressable style={styles.card}>
         <View style={styles.imagePlaceholder} />
         <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.category}>{product.category}</Text>
-        <Text style={styles.price}>{product.price.toFixed(2)} EUR</Text>
+        <Text style={styles.category}>{product.category.name}</Text>
+        <Text style={styles.price}>{Number(product.price).toFixed(2)} EUR</Text>
       </Pressable>
     </Link>
   );

@@ -1,21 +1,42 @@
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
+import { fetchProduct, type Product } from '../../api/products';
 import GradientBackground from '../../components/GradientBackground';
 import NeonButton from '../../components/NeonButton';
 import { Body, Caption, Tagline, Title } from '../../components/Typography';
 import { colors } from '../../constants/theme';
-import { mockProducts } from '../../constants/mockProducts';
 
 export default function ProductScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const product = mockProducts.find((item) => item.id === id);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!product) {
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetchProduct(id)
+      .then(setProduct)
+      .catch(() => setError('Produit introuvable.'))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
     return (
       <GradientBackground style={styles.container}>
         <Stack.Screen options={{ title: 'Produit' }} />
-        <Body>Produit introuvable.</Body>
+        <ActivityIndicator color={colors.neonGreen} />
+      </GradientBackground>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <GradientBackground style={styles.container}>
+        <Stack.Screen options={{ title: 'Produit' }} />
+        <Body>{error ?? 'Produit introuvable.'}</Body>
         <Link href="/catalog" asChild>
           <NeonButton style={styles.button}>Retour au catalogue</NeonButton>
         </Link>
@@ -30,9 +51,9 @@ export default function ProductScreen() {
       <Title style={styles.name} color={colors.neonYellow}>
         {product.name}
       </Title>
-      <Caption>{product.category}</Caption>
+      <Caption>{product.category.name}</Caption>
       <Tagline style={styles.price} color={colors.neonGreen}>
-        {product.price.toFixed(2)} EUR
+        {Number(product.price).toFixed(2)} EUR
       </Tagline>
       <Body style={styles.description}>{product.description}</Body>
       <Link href="/catalog" asChild>
